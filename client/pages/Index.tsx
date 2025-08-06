@@ -193,10 +193,10 @@ export default function Index() {
                       <div className="h-8 w-8 rounded-lg bg-learnify-600 flex items-center justify-center">
                         <BookOpen className="h-4 w-4 text-white" />
                       </div>
-                      Today's Progress
+                      {user?.name ? `${user.name.split(' ')[0]}'s Progress` : "Today's Progress"}
                     </CardTitle>
                     <Badge className="bg-gamify-gold/10 text-gamify-gold border-gamify-gold/20">
-                      Level 12
+                      Level {user?.level || 12}
                     </Badge>
                   </div>
                 </CardHeader>
