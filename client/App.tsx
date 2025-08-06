@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ProtectedRoute, PublicRoute } from "./components/ProtectedRoute";
 import Index from "./pages/Index";
+import Welcome from "./pages/Welcome";
 import Learn from "./pages/Learn";
 import Challenges from "./pages/Challenges";
 import Leaderboard from "./pages/Leaderboard";
