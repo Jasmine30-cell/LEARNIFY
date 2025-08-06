@@ -31,9 +31,9 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     );
   }
 
-  // Redirect to sign-in if not authenticated
+  // Redirect to welcome page if not authenticated
   if (!isAuthenticated) {
-    return <Navigate to="/signin" state={{ from: location }} replace />;
+    return <Navigate to="/welcome" state={{ from: location }} replace />;
   }
 
   // Render the protected content
