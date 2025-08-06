@@ -325,23 +325,23 @@ export default function Index() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-learnify-600 to-learnify-500">
+      <section className="py-24 bg-gradient-to-r from-learnify-600 to-learnify-500 hover:from-learnify-500 hover:to-learnify-600 transition-all duration-1000">
         <div className="container text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4 hover:scale-105 transition-transform duration-300 cursor-default">
             Ready to Transform Your Learning?
           </h2>
-          <p className="text-xl text-learnify-100 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-learnify-100 mb-8 max-w-2xl mx-auto hover:text-white transition-colors duration-300">
             Join thousands of learners who are already earning rewards and leveling up their skills.
             Start your journey today!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-white text-learnify-600 hover:bg-learnify-50">
+            <Button asChild size="lg" className="bg-white text-learnify-600 hover:bg-learnify-50 hover:shadow-2xl hover:shadow-white/25">
               <Link to="/learn">
                 <TrendingUp className="h-5 w-5 mr-2" />
                 Start Your Journey
               </Link>
             </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-learnify-600">
+            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-learnify-600 hover:shadow-2xl hover:shadow-white/25">
               <Link to="/leaderboard">
                 View Leaderboard
                 <ArrowRight className="h-5 w-5 ml-2" />
