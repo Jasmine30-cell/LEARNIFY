@@ -117,13 +117,19 @@ export function Navigation() {
           {/* User Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src={user?.avatar || "/placeholder.svg"} alt={user?.name || "User"} />
-                  <AvatarFallback className="bg-learnify-500 text-white">
-                    {user?.name?.split(' ').map(n => n[0]).join('').toUpperCase() || 'U'}
-                  </AvatarFallback>
-                </Avatar>
+              <Button variant="ghost" className="relative h-auto p-2 rounded-full hover:bg-muted">
+                <div className="flex items-center space-x-3">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage src={user?.avatar || "/placeholder.svg"} alt={user?.name || "User"} />
+                    <AvatarFallback className="bg-learnify-500 text-white">
+                      {user?.name?.split(' ').map(n => n[0]).join('').toUpperCase() || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="hidden md:block text-left">
+                    <p className="text-sm font-medium leading-none">{user?.name || 'User'}</p>
+                    <p className="text-xs text-muted-foreground mt-1">Level {user?.level || 1}</p>
+                  </div>
+                </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
