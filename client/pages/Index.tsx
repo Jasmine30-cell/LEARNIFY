@@ -226,7 +226,7 @@ export default function Index() {
                       className="text-center p-2 bg-gamify-streak/10 rounded-lg hover:bg-gamify-streak/20 transition-all duration-300 cursor-pointer hover:scale-105"
                       onClick={() => handleDashboardItemClick('streak')}
                     >
-                      <div className="text-sm font-medium text-gamify-streak">7 Days</div>
+                      <div className="text-sm font-medium text-gamify-streak">{user?.streak || 0} Days</div>
                       <div className="text-xs text-muted-foreground">Streak</div>
                     </div>
                     <div
