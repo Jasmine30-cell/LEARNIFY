@@ -47,6 +47,27 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Learnify Brand Colors
+        learnify: {
+          50: "hsl(var(--learnify-50))",
+          100: "hsl(var(--learnify-100))",
+          200: "hsl(var(--learnify-200))",
+          300: "hsl(var(--learnify-300))",
+          400: "hsl(var(--learnify-400))",
+          500: "hsl(var(--learnify-500))",
+          600: "hsl(var(--learnify-600))",
+          700: "hsl(var(--learnify-700))",
+          800: "hsl(var(--learnify-800))",
+          900: "hsl(var(--learnify-900))",
+          950: "hsl(var(--learnify-950))",
+        },
+        gamify: {
+          gold: "hsl(var(--gamify-gold))",
+          silver: "hsl(var(--gamify-silver))",
+          bronze: "hsl(var(--gamify-bronze))",
+          xp: "hsl(var(--gamify-xp))",
+          streak: "hsl(var(--gamify-streak))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
