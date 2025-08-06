@@ -3,22 +3,45 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Layout } from "@/components/Layout";
 import { Link } from "react-router-dom";
-import { 
-  BookOpen, 
-  Trophy, 
-  Users, 
-  Target, 
-  Star, 
-  TrendingUp, 
-  Zap, 
+import {
+  BookOpen,
+  Trophy,
+  Users,
+  Target,
+  Star,
+  TrendingUp,
+  Zap,
   Award,
   PlayCircle,
   ArrowRight,
   CheckCircle,
   Sparkles
 } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export default function Index() {
+  const [animationKey, setAnimationKey] = useState(0);
+  const [clickCount, setClickCount] = useState(0);
+
+  const handleFloatingAchievementClick = () => {
+    setClickCount(prev => prev + 1);
+    setAnimationKey(prev => prev + 1);
+    // Trigger a fun animation
+    setTimeout(() => {
+      setAnimationKey(prev => prev + 1);
+    }, 500);
+  };
+
+  const handleFeatureCardClick = (featureName: string) => {
+    // Simulate feature card interaction
+    console.log(`Clicked on ${featureName} feature`);
+    // You could trigger navigation, modals, or other interactions here
+  };
+
+  const handleStatClick = (statName: string) => {
+    console.log(`Clicked on ${statName} stat`);
+    // Could show detailed stats or trigger animations
+  };
   const features = [
     {
       icon: Target,
@@ -194,8 +217,17 @@ export default function Index() {
               </Card>
 
               {/* Floating Achievement */}
-              <div className="absolute -top-4 -right-4 bg-gamify-gold text-white p-3 rounded-xl shadow-lg animate-bounce hover:animate-spin cursor-pointer transition-all duration-300 hover:scale-125">
+              <div
+                className="absolute -top-4 -right-4 bg-gamify-gold text-white p-3 rounded-xl shadow-lg animate-bounce hover:animate-spin cursor-pointer transition-all duration-300 hover:scale-125"
+                onClick={handleFloatingAchievementClick}
+                key={animationKey}
+              >
                 <Award className="h-6 w-6" />
+                {clickCount > 0 && (
+                  <div className="absolute -top-2 -left-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+                    {clickCount}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -222,6 +254,7 @@ export default function Index() {
                 <Card
                   key={index}
                   className="border-2 hover:border-learnify-200 dark:hover:border-learnify-800 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-learnify-500/10 cursor-pointer group"
+                  onClick={() => handleFeatureCardClick(feature.title)}
                 >
                   <CardHeader>
                     <div className={`h-12 w-12 rounded-lg bg-gradient-to-br from-learnify-100 to-learnify-200 dark:from-learnify-900 dark:to-learnify-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
