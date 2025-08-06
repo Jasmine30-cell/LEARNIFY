@@ -136,7 +136,7 @@ export default function Index() {
 
             <div className="relative">
               {/* Learning Dashboard Preview */}
-              <Card className="bg-white/80 dark:bg-card/80 backdrop-blur-sm border-2 border-learnify-200 dark:border-learnify-800 shadow-2xl">
+              <Card className="bg-white/80 dark:bg-card/80 backdrop-blur-sm border-2 border-learnify-200 dark:border-learnify-800 shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 cursor-pointer group">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle className="flex items-center gap-2">
@@ -162,15 +162,15 @@ export default function Index() {
                   </div>
                   
                   <div className="grid grid-cols-3 gap-2">
-                    <div className="text-center p-2 bg-gamify-xp/10 rounded-lg">
+                    <div className="text-center p-2 bg-gamify-xp/10 rounded-lg hover:bg-gamify-xp/20 transition-colors cursor-pointer">
                       <div className="text-sm font-medium text-gamify-xp">+125 XP</div>
                       <div className="text-xs text-muted-foreground">Today</div>
                     </div>
-                    <div className="text-center p-2 bg-gamify-streak/10 rounded-lg">
+                    <div className="text-center p-2 bg-gamify-streak/10 rounded-lg hover:bg-gamify-streak/20 transition-colors cursor-pointer">
                       <div className="text-sm font-medium text-gamify-streak">7 Days</div>
                       <div className="text-xs text-muted-foreground">Streak</div>
                     </div>
-                    <div className="text-center p-2 bg-gamify-gold/10 rounded-lg">
+                    <div className="text-center p-2 bg-gamify-gold/10 rounded-lg hover:bg-gamify-gold/20 transition-colors cursor-pointer">
                       <div className="text-sm font-medium text-gamify-gold">3 New</div>
                       <div className="text-xs text-muted-foreground">Badges</div>
                     </div>
