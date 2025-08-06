@@ -183,8 +183,8 @@ export default function Index() {
                       <span>Daily Goal</span>
                       <span>75% Complete</span>
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-learnify-600 h-2 rounded-full w-3/4" />
+                    <div className="w-full bg-muted rounded-full h-2 cursor-pointer hover:h-3 transition-all duration-300">
+                      <div className="bg-learnify-600 h-2 rounded-full w-3/4 hover:h-3 transition-all duration-300 hover:bg-gradient-to-r hover:from-learnify-500 hover:to-learnify-700" />
                     </div>
                   </div>
                   
