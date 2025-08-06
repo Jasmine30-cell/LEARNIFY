@@ -44,6 +44,23 @@ export default function Index() {
   const handleStatClick = (statName: string) => {
     showStatToast(statName);
   };
+
+  const handleDashboardItemClick = (itemType: string) => {
+    const { toast } = require("@/hooks/use-toast");
+    const messages = {
+      'xp': '🌟 Great job! Keep earning XP to level up and unlock new features!',
+      'streak': '🔥 Amazing streak! Don\'t break the chain - learn something new today!',
+      'badges': '🏆 You\'ve earned 3 new badges! Check your profile to see them all.',
+      'progress': '📊 You\'re 75% complete with today\'s goal. Just a little more to go!',
+      'completed-task': '✅ Task already completed! Great work on staying consistent.',
+      'pending-task': '⏳ Ready to tackle this challenge? Click to get started!'
+    };
+
+    toast.toast({
+      title: 'Dashboard Interaction',
+      description: messages[itemType as keyof typeof messages] || 'Feature coming soon!',
+    });
+  };
   const features = [
     {
       icon: Target,
@@ -185,38 +202,59 @@ export default function Index() {
                       <span>Daily Goal</span>
                       <span>75% Complete</span>
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2 cursor-pointer hover:h-3 transition-all duration-300">
+                    <div
+                      className="w-full bg-muted rounded-full h-2 cursor-pointer hover:h-3 transition-all duration-300"
+                      onClick={() => handleDashboardItemClick('progress')}
+                    >
                       <div className="bg-learnify-600 h-2 rounded-full w-3/4 hover:h-3 transition-all duration-300 hover:bg-gradient-to-r hover:from-learnify-500 hover:to-learnify-700" />
                     </div>
                   </div>
                   
                   <div className="grid grid-cols-3 gap-2">
-                    <div className="text-center p-2 bg-gamify-xp/10 rounded-lg hover:bg-gamify-xp/20 transition-colors cursor-pointer">
+                    <div
+                      className="text-center p-2 bg-gamify-xp/10 rounded-lg hover:bg-gamify-xp/20 transition-all duration-300 cursor-pointer hover:scale-105"
+                      onClick={() => handleDashboardItemClick('xp')}
+                    >
                       <div className="text-sm font-medium text-gamify-xp">+125 XP</div>
                       <div className="text-xs text-muted-foreground">Today</div>
                     </div>
-                    <div className="text-center p-2 bg-gamify-streak/10 rounded-lg hover:bg-gamify-streak/20 transition-colors cursor-pointer">
+                    <div
+                      className="text-center p-2 bg-gamify-streak/10 rounded-lg hover:bg-gamify-streak/20 transition-all duration-300 cursor-pointer hover:scale-105"
+                      onClick={() => handleDashboardItemClick('streak')}
+                    >
                       <div className="text-sm font-medium text-gamify-streak">7 Days</div>
                       <div className="text-xs text-muted-foreground">Streak</div>
                     </div>
-                    <div className="text-center p-2 bg-gamify-gold/10 rounded-lg hover:bg-gamify-gold/20 transition-colors cursor-pointer">
+                    <div
+                      className="text-center p-2 bg-gamify-gold/10 rounded-lg hover:bg-gamify-gold/20 transition-all duration-300 cursor-pointer hover:scale-105"
+                      onClick={() => handleDashboardItemClick('badges')}
+                    >
                       <div className="text-sm font-medium text-gamify-gold">3 New</div>
                       <div className="text-xs text-muted-foreground">Badges</div>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg">
+                    <div
+                      className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg hover:bg-gamify-xp/10 transition-all duration-300 cursor-pointer hover:scale-102"
+                      onClick={() => handleDashboardItemClick('completed-task')}
+                    >
                       <CheckCircle className="h-4 w-4 text-gamify-xp" />
                       <span className="text-sm">Complete JavaScript Basics</span>
                     </div>
-                    <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg">
+                    <div
+                      className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg hover:bg-gamify-xp/10 transition-all duration-300 cursor-pointer hover:scale-102"
+                      onClick={() => handleDashboardItemClick('completed-task')}
+                    >
                       <CheckCircle className="h-4 w-4 text-gamify-xp" />
                       <span className="text-sm">Daily Coding Challenge</span>
                     </div>
-                    <div className="flex items-center gap-2 p-2 bg-muted/30 rounded-lg">
-                      <Target className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">Algorithm Practice</span>
+                    <div
+                      className="flex items-center gap-2 p-2 bg-muted/30 rounded-lg hover:bg-learnify-100 dark:hover:bg-learnify-900 transition-all duration-300 cursor-pointer hover:scale-102"
+                      onClick={() => handleDashboardItemClick('pending-task')}
+                    >
+                      <Target className="h-4 w-4 text-muted-foreground hover:text-learnify-600" />
+                      <span className="text-sm text-muted-foreground hover:text-learnify-600">Algorithm Practice</span>
                     </div>
                   </div>
                 </CardContent>
