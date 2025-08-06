@@ -126,14 +126,20 @@ export default function Index() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
+                {user && (
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm text-muted-foreground">Welcome back,</span>
+                    <span className="text-lg font-semibold text-learnify-600">{user.name}!</span>
+                  </div>
+                )}
                 <Badge className="bg-learnify-100 text-learnify-700 border-learnify-200 dark:bg-learnify-900 dark:text-learnify-300">
                   <Sparkles className="h-3 w-3 mr-1" />
                   New: AI-Powered Learning Paths
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold tracking-tight">
-                  Learn, Earn, and{" "}
+                  {user ? 'Continue Your Journey' : 'Learn, Earn, and'}{" "}
                   <span className="bg-gradient-to-r from-learnify-600 to-learnify-500 bg-clip-text text-transparent">
-                    Level Up
+                    {user ? 'and Level Up!' : 'Level Up'}
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-[600px]">
