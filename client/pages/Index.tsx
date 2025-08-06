@@ -194,7 +194,7 @@ export default function Index() {
               </Card>
 
               {/* Floating Achievement */}
-              <div className="absolute -top-4 -right-4 bg-gamify-gold text-white p-3 rounded-xl shadow-lg animate-pulse">
+              <div className="absolute -top-4 -right-4 bg-gamify-gold text-white p-3 rounded-xl shadow-lg animate-bounce hover:animate-spin cursor-pointer transition-all duration-300 hover:scale-125">
                 <Award className="h-6 w-6" />
               </div>
             </div>
