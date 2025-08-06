@@ -5,10 +5,26 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Link, useLocation } from "react-router-dom";
 import { BookOpen, Trophy, Users, Target, Bell, Search, Menu } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export function Navigation() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleNotificationClick = () => {
+    toast({
+      title: "Notifications 🔔",
+      description: "You have 3 new notifications! Daily challenge completed, new badge earned, and friend request received.",
+    });
+  };
+
+  const handleXPClick = () => {
+    toast({
+      title: "XP Progress 🌟",
+      description: "1,247 XP earned! You're only 253 XP away from reaching Level 13. Keep learning!",
+    });
+  };
 
   const navItems = [
     { name: "Learn", href: "/learn", icon: BookOpen },
@@ -55,20 +71,33 @@ export function Navigation() {
         {/* Right side - Search, Notifications, User */}
         <div className="flex items-center space-x-4">
           {/* Search */}
-          <Button variant="ghost" size="icon" className="hidden sm:flex hover:rotate-12 transition-transform duration-300">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hidden sm:flex hover:rotate-12 transition-transform duration-300"
+            onClick={() => toast({ title: "Search 🔍", description: "Search feature coming soon! You'll be able to find courses, challenges, and community content." })}
+          >
             <Search className="h-4 w-4" />
           </Button>
 
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative hover:scale-110 transition-transform duration-300">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative hover:scale-110 transition-transform duration-300"
+            onClick={handleNotificationClick}
+          >
             <Bell className="h-4 w-4" />
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-gamify-streak animate-pulse hover:animate-bounce">
+            <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-gamify-streak animate-pulse hover:animate-bounce cursor-pointer">
               3
             </Badge>
           </Button>
 
           {/* User XP Display */}
-          <div className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-gamify-xp/10 rounded-full hover:bg-gamify-xp/20 transition-all duration-300 cursor-pointer hover:scale-105">
+          <div
+            className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-gamify-xp/10 rounded-full hover:bg-gamify-xp/20 transition-all duration-300 cursor-pointer hover:scale-105"
+            onClick={handleXPClick}
+          >
             <div className="h-6 w-6 rounded-full bg-gamify-xp flex items-center justify-center hover:animate-spin transition-transform">
               <span className="text-xs font-bold text-white">XP</span>
             </div>
