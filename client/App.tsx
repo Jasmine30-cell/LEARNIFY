@@ -29,6 +29,11 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             {/* Public routes - only accessible when not authenticated */}
+            <Route path="/welcome" element={
+              <PublicRoute>
+                <Welcome />
+              </PublicRoute>
+            } />
             <Route path="/signin" element={
               <PublicRoute>
                 <SignIn />
