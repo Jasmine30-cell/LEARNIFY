@@ -255,10 +255,13 @@ export default function Index() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-2">
+              <Card
+                key={index}
+                className="border-2 hover:border-learnify-200 dark:hover:border-learnify-800 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer group"
+              >
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-4">
-                    <div className="h-12 w-12 rounded-full bg-learnify-600 flex items-center justify-center text-white font-bold">
+                    <div className="h-12 w-12 rounded-full bg-learnify-600 flex items-center justify-center text-white font-bold group-hover:scale-110 transition-transform duration-300">
                       {testimonial.avatar}
                     </div>
                     <div className="flex-1">
@@ -272,7 +275,7 @@ export default function Index() {
                       <p className="text-sm">{testimonial.content}</p>
                       <div className="flex items-center gap-1 mt-3">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-4 w-4 fill-gamify-gold text-gamify-gold" />
+                          <Star key={i} className="h-4 w-4 fill-gamify-gold text-gamify-gold hover:scale-125 transition-transform duration-200 cursor-pointer" />
                         ))}
                       </div>
                     </div>
