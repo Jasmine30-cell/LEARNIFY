@@ -6,19 +6,24 @@ export function useInteractiveToasts() {
   const { toast } = useToast();
 
   const showFeatureToast = (featureName: string) => {
-    const messages = {
+    const predefinedMessages = {
       "Daily Challenges": "🎯 Daily challenges unlock at level 3! Keep learning to unlock this feature.",
       "Gamified Learning": "🏆 Gamification features coming soon! Earn your first badge to preview.",
       "Social Learning": "👥 Connect with other learners! Join our community to get started.",
       "Instant Rewards": "⚡ Rewards available after completing your first course!"
     };
 
+    // Check if it's a predefined feature or a custom message
+    const isCustomMessage = !predefinedMessages.hasOwnProperty(featureName);
+    const description = isCustomMessage ? featureName : predefinedMessages[featureName as keyof typeof predefinedMessages];
+    const title = isCustomMessage ? "Dashboard Interaction" : featureName;
+
     toast({
-      title: featureName,
-      description: messages[featureName as keyof typeof messages] || "Feature coming soon!",
+      title: title,
+      description: description || "Feature coming soon!",
       action: (
         <Button variant="outline" size="sm">
-          Learn More
+          {isCustomMessage ? "Got it!" : "Learn More"}
         </Button>
       ),
     });
