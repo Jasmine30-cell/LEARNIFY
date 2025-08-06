@@ -219,12 +219,15 @@ export default function Index() {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="border-2 hover:border-learnify-200 dark:hover:border-learnify-800 transition-colors">
+                <Card
+                  key={index}
+                  className="border-2 hover:border-learnify-200 dark:hover:border-learnify-800 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-learnify-500/10 cursor-pointer group"
+                >
                   <CardHeader>
-                    <div className={`h-12 w-12 rounded-lg bg-gradient-to-br from-learnify-100 to-learnify-200 dark:from-learnify-900 dark:to-learnify-800 flex items-center justify-center mb-4`}>
-                      <Icon className={`h-6 w-6 ${feature.color}`} />
+                    <div className={`h-12 w-12 rounded-lg bg-gradient-to-br from-learnify-100 to-learnify-200 dark:from-learnify-900 dark:to-learnify-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className={`h-6 w-6 ${feature.color} group-hover:animate-pulse`} />
                     </div>
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
+                    <CardTitle className="text-xl group-hover:text-learnify-600 transition-colors">{feature.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <CardDescription className="text-base">
