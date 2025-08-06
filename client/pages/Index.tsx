@@ -25,6 +25,7 @@ export default function Index() {
   const [animationKey, setAnimationKey] = useState(0);
   const [clickCount, setClickCount] = useState(0);
   const { showFeatureToast, showStatToast, showAchievementToast } = useInteractiveToasts();
+  const { user } = useAuth();
 
   const handleFloatingAchievementClick = () => {
     const newCount = clickCount + 1;
