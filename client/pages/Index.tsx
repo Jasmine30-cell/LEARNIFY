@@ -145,11 +145,15 @@ export default function Index() {
                 {stats.map((stat, index) => {
                   const Icon = stat.icon;
                   return (
-                    <div key={index} className="text-center">
+                    <div
+                      key={index}
+                      className="text-center cursor-pointer group hover:scale-110 transition-transform duration-300"
+                      onClick={() => handleStatClick(stat.label)}
+                    >
                       <div className="flex justify-center mb-2">
-                        <Icon className="h-6 w-6 text-learnify-600" />
+                        <Icon className="h-6 w-6 text-learnify-600 group-hover:text-learnify-500 group-hover:animate-bounce transition-colors" />
                       </div>
-                      <div className="text-2xl font-bold">{stat.value}</div>
+                      <div className="text-2xl font-bold group-hover:text-learnify-600 transition-colors">{stat.value}</div>
                       <div className="text-sm text-muted-foreground">{stat.label}</div>
                     </div>
                   );
