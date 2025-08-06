@@ -21,11 +21,11 @@ export function Navigation() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-learnify-500 to-learnify-600 flex items-center justify-center">
-            <BookOpen className="h-5 w-5 text-white" />
+        <Link to="/" className="flex items-center space-x-2 group">
+          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-learnify-500 to-learnify-600 flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
+            <BookOpen className="h-5 w-5 text-white group-hover:animate-pulse" />
           </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-learnify-600 to-learnify-500 bg-clip-text text-transparent">
+          <span className="text-xl font-bold bg-gradient-to-r from-learnify-600 to-learnify-500 bg-clip-text text-transparent group-hover:from-learnify-500 group-hover:to-learnify-600 transition-all duration-300">
             Learnify
           </span>
         </Link>
@@ -39,7 +39,7 @@ export function Navigation() {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
                   isActive
                     ? "bg-learnify-100 text-learnify-700 dark:bg-learnify-900 dark:text-learnify-300"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -55,21 +55,21 @@ export function Navigation() {
         {/* Right side - Search, Notifications, User */}
         <div className="flex items-center space-x-4">
           {/* Search */}
-          <Button variant="ghost" size="icon" className="hidden sm:flex">
+          <Button variant="ghost" size="icon" className="hidden sm:flex hover:rotate-12 transition-transform duration-300">
             <Search className="h-4 w-4" />
           </Button>
 
           {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
+          <Button variant="ghost" size="icon" className="relative hover:scale-110 transition-transform duration-300">
             <Bell className="h-4 w-4" />
-            <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-gamify-streak">
+            <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs bg-gamify-streak animate-pulse hover:animate-bounce">
               3
             </Badge>
           </Button>
 
           {/* User XP Display */}
-          <div className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-gamify-xp/10 rounded-full">
-            <div className="h-6 w-6 rounded-full bg-gamify-xp flex items-center justify-center">
+          <div className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-gamify-xp/10 rounded-full hover:bg-gamify-xp/20 transition-all duration-300 cursor-pointer hover:scale-105">
+            <div className="h-6 w-6 rounded-full bg-gamify-xp flex items-center justify-center hover:animate-spin transition-transform">
               <span className="text-xs font-bold text-white">XP</span>
             </div>
             <span className="text-sm font-medium text-gamify-xp">1,247</span>
