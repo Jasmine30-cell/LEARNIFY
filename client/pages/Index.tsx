@@ -23,10 +23,14 @@ import { useInteractiveToasts } from "@/components/InteractiveToast";
 export default function Index() {
   const [animationKey, setAnimationKey] = useState(0);
   const [clickCount, setClickCount] = useState(0);
+  const { showFeatureToast, showStatToast, showAchievementToast } = useInteractiveToasts();
 
   const handleFloatingAchievementClick = () => {
-    setClickCount(prev => prev + 1);
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
     setAnimationKey(prev => prev + 1);
+    showAchievementToast(newCount);
+
     // Trigger a fun animation
     setTimeout(() => {
       setAnimationKey(prev => prev + 1);
@@ -34,14 +38,11 @@ export default function Index() {
   };
 
   const handleFeatureCardClick = (featureName: string) => {
-    // Simulate feature card interaction
-    console.log(`Clicked on ${featureName} feature`);
-    // You could trigger navigation, modals, or other interactions here
+    showFeatureToast(featureName);
   };
 
   const handleStatClick = (statName: string) => {
-    console.log(`Clicked on ${statName} stat`);
-    // Could show detailed stats or trigger animations
+    showStatToast(statName);
   };
   const features = [
     {
