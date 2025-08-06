@@ -3,14 +3,16 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Link, useLocation } from "react-router-dom";
-import { BookOpen, Trophy, Users, Target, Bell, Search, Menu } from "lucide-react";
+import { BookOpen, Trophy, Users, Target, Bell, Search, Menu, LogOut } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 
 export function Navigation() {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { toast } = useToast();
+  const { user, signOut } = useAuth();
 
   const handleNotificationClick = () => {
     toast({
@@ -22,7 +24,15 @@ export function Navigation() {
   const handleXPClick = () => {
     toast({
       title: "XP Progress 🌟",
-      description: "1,247 XP earned! You're only 253 XP away from reaching Level 13. Keep learning!",
+      description: `${user?.xp || 0} XP earned! You're only ${1500 - (user?.xp || 0)} XP away from reaching Level ${(user?.level || 0) + 1}. Keep learning!`,
+    });
+  };
+
+  const handleSignOut = () => {
+    signOut();
+    toast({
+      title: "Signed Out 👋",
+      description: "You've been signed out successfully. See you next time!",
     });
   };
 
@@ -101,7 +111,7 @@ export function Navigation() {
             <div className="h-6 w-6 rounded-full bg-gamify-xp flex items-center justify-center hover:animate-spin transition-transform">
               <span className="text-xs font-bold text-white">XP</span>
             </div>
-            <span className="text-sm font-medium text-gamify-xp">1,247</span>
+            <span className="text-sm font-medium text-gamify-xp">{user?.xp?.toLocaleString() || '0'}</span>
           </div>
 
           {/* User Menu */}
@@ -109,16 +119,26 @@ export function Navigation() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src="/placeholder.svg" alt="User" />
-                  <AvatarFallback className="bg-learnify-500 text-white">JD</AvatarFallback>
+                  <AvatarImage src={user?.avatar || "/placeholder.svg"} alt={user?.name || "User"} />
+                  <AvatarFallback className="bg-learnify-500 text-white">
+                    {user?.name?.split(' ').map(n => n[0]).join('').toUpperCase() || 'U'}
+                  </AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">John Doe</p>
-                  <p className="text-xs leading-none text-muted-foreground">john@example.com</p>
+                  <p className="text-sm font-medium leading-none">{user?.name || 'User'}</p>
+                  <p className="text-xs leading-none text-muted-foreground">{user?.email || 'user@example.com'}</p>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-xs bg-learnify-100 text-learnify-700 px-2 py-1 rounded-full dark:bg-learnify-900 dark:text-learnify-300">
+                      Level {user?.level || 1}
+                    </span>
+                    <span className="text-xs bg-gamify-streak/10 text-gamify-streak px-2 py-1 rounded-full">
+                      {user?.streak || 0} day streak
+                    </span>
+                  </div>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
@@ -126,7 +146,10 @@ export function Navigation() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Log out</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleSignOut} className="text-destructive focus:text-destructive">
+                <LogOut className="h-4 w-4 mr-2" />
+                Log out
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
