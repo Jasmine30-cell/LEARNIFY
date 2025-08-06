@@ -46,7 +46,6 @@ export default function Index() {
   };
 
   const handleDashboardItemClick = (itemType: string) => {
-    const { toast } = require("@/hooks/use-toast");
     const messages = {
       'xp': '🌟 Great job! Keep earning XP to level up and unlock new features!',
       'streak': '🔥 Amazing streak! Don\'t break the chain - learn something new today!',
@@ -56,10 +55,7 @@ export default function Index() {
       'pending-task': '⏳ Ready to tackle this challenge? Click to get started!'
     };
 
-    toast.toast({
-      title: 'Dashboard Interaction',
-      description: messages[itemType as keyof typeof messages] || 'Feature coming soon!',
-    });
+    showFeatureToast(messages[itemType as keyof typeof messages] || 'Feature coming soon!');
   };
   const features = [
     {
