@@ -18,6 +18,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useInteractiveToasts } from "@/components/InteractiveToast";
 
 export default function Index() {
   const [animationKey, setAnimationKey] = useState(0);
