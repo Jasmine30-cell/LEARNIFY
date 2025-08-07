@@ -86,6 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email,
         avatar: undefined,
         xp: 0,
+        coins: 50,
         level: 1,
         streak: 0
       };
