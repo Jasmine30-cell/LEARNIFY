@@ -45,8 +45,10 @@ interface Subject {
 
 export default function Learn() {
   const { user } = useAuth();
+  const { userProgress } = useUserProgress();
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
 
+  // Map actual user progress to subject display data
   const subjects: Subject[] = [
     {
       id: "math",
@@ -57,25 +59,25 @@ export default function Learn() {
       bgGradient: "from-orange-100 to-red-100 dark:from-orange-950 dark:to-red-950",
       textColor: "text-orange-700 dark:text-orange-400",
       borderColor: "border-orange-200 dark:border-orange-800",
-      levels: 5,
-      completedLevels: 3,
-      xpEarned: 450,
+      levels: userProgress.subjects.find(s => s.id === 'math')?.totalLevels || 5,
+      completedLevels: userProgress.subjects.find(s => s.id === 'math')?.levelsCompleted || 0,
+      xpEarned: Math.floor((userProgress.subjects.find(s => s.id === 'math')?.progress || 0) * 7.5), // Convert percentage to XP
       totalXP: 750,
       character: "Math Knight",
       characterIcon: Crown
     },
     {
       id: "science",
-      name: "Lab Adventures", 
+      name: "Lab Adventures",
       theme: "🚀 Sci-Fi Laboratory",
       description: "Become a mini-scientist exploring nature, space, and the human body!",
       icon: Microscope,
       bgGradient: "from-blue-100 to-cyan-100 dark:from-blue-950 dark:to-cyan-950",
       textColor: "text-blue-700 dark:text-blue-400",
       borderColor: "border-blue-200 dark:border-blue-800",
-      levels: 4,
-      completedLevels: 2,
-      xpEarned: 320,
+      levels: userProgress.subjects.find(s => s.id === 'science')?.totalLevels || 4,
+      completedLevels: userProgress.subjects.find(s => s.id === 'science')?.levelsCompleted || 0,
+      xpEarned: Math.floor((userProgress.subjects.find(s => s.id === 'science')?.progress || 0) * 6.0), // Convert percentage to XP
       totalXP: 600,
       character: "Science Explorer",
       characterIcon: Rocket
@@ -83,24 +85,24 @@ export default function Learn() {
     {
       id: "english",
       name: "Word Wizard's Land",
-      theme: "✨ Magical Kingdom", 
+      theme: "✨ Magical Kingdom",
       description: "Help the Word Wizard fix broken books, spells, and solve magical riddles!",
       icon: BookOpen,
       bgGradient: "from-purple-100 to-pink-100 dark:from-purple-950 dark:to-pink-950",
       textColor: "text-purple-700 dark:text-purple-400",
       borderColor: "border-purple-200 dark:border-purple-800",
-      levels: 4,
-      completedLevels: 1,
-      xpEarned: 180,
+      levels: userProgress.subjects.find(s => s.id === 'english')?.totalLevels || 4,
+      completedLevels: userProgress.subjects.find(s => s.id === 'english')?.levelsCompleted || 0,
+      xpEarned: Math.floor((userProgress.subjects.find(s => s.id === 'english')?.progress || 0) * 5.0), // Convert percentage to XP
       totalXP: 500,
       character: "Word Wizard",
       characterIcon: Wand2
     }
   ];
 
-  const totalXPEarned = subjects.reduce((sum, subject) => sum + subject.xpEarned, 0);
+  const totalXPEarned = user?.xp || 0; // Use actual user XP
   const totalPossibleXP = subjects.reduce((sum, subject) => sum + subject.totalXP, 0);
-  const overallProgress = (totalXPEarned / totalPossibleXP) * 100;
+  const overallProgress = totalPossibleXP > 0 ? (totalXPEarned / totalPossibleXP) * 100 : 0;
 
   return (
     <Layout>
