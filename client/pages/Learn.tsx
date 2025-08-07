@@ -126,12 +126,12 @@ export default function Learn() {
             <CardContent className="pt-6">
               <div className="text-center mb-4">
                 <h3 className="font-semibold mb-2">Your Learning Journey</h3>
-                <div className="text-3xl font-bold text-learnify-600 mb-1">{totalXPEarned} XP</div>
+                <div className="text-3xl font-bold text-learnify-600 mb-1">{user?.xp || 0} XP</div>
                 <p className="text-sm text-muted-foreground">Total Experience Points</p>
               </div>
-              <Progress value={overallProgress} className="h-3 mb-2" />
+              <Progress value={Math.min(100, overallProgress)} className="h-3 mb-2" />
               <p className="text-xs text-muted-foreground text-center">
-                {Math.round(overallProgress)}% Complete • Level {user?.level || 1} Learner
+                {Math.round(Math.min(100, overallProgress))}% Complete • Level {user?.level || 1} Learner
               </p>
             </CardContent>
           </Card>
