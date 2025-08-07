@@ -260,7 +260,7 @@ export function FloatingReward({ show, type, amount, x, y }: FloatingRewardProps
         <span>+{amount}</span>
       </div>
       
-      <style jsx>{`
+      <style>{`
         @keyframes float-up {
           0% {
             opacity: 1;
