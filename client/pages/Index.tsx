@@ -51,12 +51,12 @@ export default function Index() {
 
   const handleDashboardItemClick = (itemType: string) => {
     const messages = {
-      'xp': '🌟 Great job! Keep earning XP to level up and unlock new features!',
-      'streak': '🔥 Amazing streak! Don\'t break the chain - learn something new today!',
-      'badges': '🏆 You\'ve earned 3 new badges! Check your profile to see them all.',
-      'progress': '📊 You\'re 75% complete with today\'s goal. Just a little more to go!',
-      'completed-task': '✅ Task already completed! Great work on staying consistent.',
-      'pending-task': '⏳ Ready to tackle this challenge? Click to get started!'
+      'xp': `🌟 Amazing ${user?.name}! You've earned ${userProgress.todayXP} XP today. Keep it up!`,
+      'streak': `🔥 Fantastic ${user?.streak}-day streak! You're on fire - keep learning!`,
+      'badges': `🏆 You've earned ${userProgress.totalBadges} badges total with ${userProgress.newBadges} new ones!`,
+      'progress': `📊 You're ${userProgress.dailyGoal.percentage}% complete with today's goal. Almost there!`,
+      'completed-task': '✅ Task completed! Your dedication is paying off.',
+      'pending-task': '⏳ Ready for your next challenge? Let\'s keep learning!'
     };
 
     showFeatureToast(messages[itemType as keyof typeof messages] || 'Feature coming soon!');
