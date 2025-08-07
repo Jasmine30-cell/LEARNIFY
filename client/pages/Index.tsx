@@ -248,27 +248,40 @@ export default function Index() {
                   </div>
 
                   <div className="space-y-2">
-                    <div
-                      className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg hover:bg-gamify-xp/10 transition-all duration-300 cursor-pointer hover:scale-102"
-                      onClick={() => handleDashboardItemClick('completed-task')}
-                    >
-                      <CheckCircle className="h-4 w-4 text-gamify-xp" />
-                      <span className="text-sm">Complete JavaScript Basics</span>
-                    </div>
-                    <div
-                      className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg hover:bg-gamify-xp/10 transition-all duration-300 cursor-pointer hover:scale-102"
-                      onClick={() => handleDashboardItemClick('completed-task')}
-                    >
-                      <CheckCircle className="h-4 w-4 text-gamify-xp" />
-                      <span className="text-sm">Daily Coding Challenge</span>
-                    </div>
-                    <div
-                      className="flex items-center gap-2 p-2 bg-muted/30 rounded-lg hover:bg-learnify-100 dark:hover:bg-learnify-900 transition-all duration-300 cursor-pointer hover:scale-102"
-                      onClick={() => handleDashboardItemClick('pending-task')}
-                    >
-                      <Target className="h-4 w-4 text-muted-foreground hover:text-learnify-600" />
-                      <span className="text-sm text-muted-foreground hover:text-learnify-600">Algorithm Practice</span>
-                    </div>
+                    {userProgress.completedTasks.slice(0, 2).map((task) => (
+                      <div
+                        key={task.id}
+                        className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg hover:bg-gamify-xp/10 transition-all duration-300 cursor-pointer hover:scale-102"
+                        onClick={() => handleDashboardItemClick('completed-task')}
+                      >
+                        <CheckCircle className="h-4 w-4 text-gamify-xp" />
+                        <span className="text-sm">{task.title}</span>
+                        <span className="text-xs bg-muted px-2 py-1 rounded ml-auto">{task.subject}</span>
+                      </div>
+                    ))}
+                    {userProgress.pendingTasks.slice(0, 1).map((task) => (
+                      <div
+                        key={task.id}
+                        className="flex items-center gap-2 p-2 bg-muted/30 rounded-lg hover:bg-learnify-100 dark:hover:bg-learnify-900 transition-all duration-300 cursor-pointer hover:scale-102"
+                        onClick={() => handleDashboardItemClick('pending-task')}
+                      >
+                        <Target className="h-4 w-4 text-muted-foreground hover:text-learnify-600" />
+                        <span className="text-sm text-muted-foreground hover:text-learnify-600">{task.title}</span>
+                        <span className={`text-xs px-2 py-1 rounded ml-auto ${
+                          task.difficulty === 'Easy' ? 'bg-green-100 text-green-700' :
+                          task.difficulty === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
+                          'bg-red-100 text-red-700'
+                        }`}>
+                          {task.difficulty}
+                        </span>
+                      </div>
+                    ))}
+                    {userProgress.completedTasks.length === 0 && userProgress.pendingTasks.length === 0 && (
+                      <div className="text-center py-4 text-muted-foreground">
+                        <Target className="h-6 w-6 mx-auto mb-2 opacity-50" />
+                        <p className="text-sm">Start learning to see your progress!</p>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
