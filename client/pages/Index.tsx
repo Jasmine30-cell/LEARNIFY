@@ -407,6 +407,174 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Custom Game Creation Section */}
+      <section className="py-16 bg-gradient-to-br from-learnify-50 to-blue-50 dark:from-learnify-950 dark:to-blue-950">
+        <div className="container">
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="h-12 w-12 rounded-full bg-gradient-to-br from-learnify-500 to-blue-500 flex items-center justify-center animate-pulse">
+                <Gamepad2 className="h-6 w-6 text-white" />
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-learnify-600 to-blue-600 bg-clip-text text-transparent">
+                Create Your Own Learning Game
+              </h2>
+            </div>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Design a personalized learning experience! Choose any subject, pick a topic, and select your favorite game style.
+              Our AI will create a custom game just for you.
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <Card className="border-2 border-learnify-200 dark:border-learnify-800 shadow-xl">
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-3 gap-8 mb-8">
+                  {/* Column 1: Subject */}
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-green-100 to-emerald-100 dark:from-green-900 dark:to-emerald-900 flex items-center justify-center mx-auto mb-3">
+                        <BookOpen className="h-8 w-8 text-green-600" />
+                      </div>
+                      <Label htmlFor="subject" className="text-lg font-semibold text-green-700 dark:text-green-400">
+                        🔷 What do you want to learn?
+                      </Label>
+                    </div>
+                    <Input
+                      id="subject"
+                      placeholder="e.g., Python, Photosynthesis, Ancient History"
+                      value={customGame.subject}
+                      onChange={(e) => handleCustomGameChange('subject', e.target.value)}
+                      className="text-center border-green-200 dark:border-green-800 focus:border-green-400 focus:ring-green-400"
+                    />
+                    <div className="text-xs text-muted-foreground text-center">
+                      Examples: "Python", "Photosynthesis", "Ancient History", "Typing Skills"
+                    </div>
+                  </div>
+
+                  {/* Column 2: Topic */}
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-blue-100 to-cyan-100 dark:from-blue-900 dark:to-cyan-900 flex items-center justify-center mx-auto mb-3">
+                        <Target className="h-8 w-8 text-blue-600" />
+                      </div>
+                      <Label htmlFor="topic" className="text-lg font-semibold text-blue-700 dark:text-blue-400">
+                        🔷 What specific topic?
+                      </Label>
+                    </div>
+                    <Input
+                      id="topic"
+                      placeholder="e.g., Loops, Respiration, World War II"
+                      value={customGame.topic}
+                      onChange={(e) => handleCustomGameChange('topic', e.target.value)}
+                      className="text-center border-blue-200 dark:border-blue-800 focus:border-blue-400 focus:ring-blue-400"
+                    />
+                    <div className="text-xs text-muted-foreground text-center">
+                      Examples: "Loops", "Respiration", "World War II", "Basic Grammar"
+                    </div>
+                  </div>
+
+                  {/* Column 3: Game Genre */}
+                  <div className="space-y-4">
+                    <div className="text-center">
+                      <div className="h-16 w-16 rounded-xl bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 flex items-center justify-center mx-auto mb-3">
+                        <Gamepad2 className="h-8 w-8 text-purple-600" />
+                      </div>
+                      <Label className="text-lg font-semibold text-purple-700 dark:text-purple-400">
+                        🔷 Select Game Genre
+                      </Label>
+                    </div>
+                    <Select value={customGame.genre} onValueChange={(value) => handleCustomGameChange('genre', value)}>
+                      <SelectTrigger className="border-purple-200 dark:border-purple-800 focus:border-purple-400 focus:ring-purple-400">
+                        <SelectValue placeholder="Choose your game style" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {gameGenres.map((genre) => {
+                          const Icon = genre.icon;
+                          return (
+                            <SelectItem key={genre.value} value={genre.value}>
+                              <div className="flex items-center gap-2">
+                                <Icon className="h-4 w-4" />
+                                {genre.label}
+                              </div>
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <div className="text-xs text-muted-foreground text-center">
+                      Pick the style that excites you most!
+                    </div>
+                  </div>
+                </div>
+
+                {/* Generate Button */}
+                <div className="text-center mb-8">
+                  <Button
+                    size="lg"
+                    onClick={handleGenerateGame}
+                    disabled={isGeneratingGame || !customGame.subject || !customGame.topic || !customGame.genre}
+                    className="bg-gradient-to-r from-learnify-600 to-blue-600 hover:from-learnify-700 hover:to-blue-700 text-white px-12 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    {isGeneratingGame ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
+                        Generating Your Game...
+                      </>
+                    ) : (
+                      <>
+                        <Gamepad2 className="h-5 w-5 mr-3" />
+                        🎮 Generate & Play Game
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {/* AI Suggestions Panel */}
+                <Card className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-950 dark:to-orange-950 border-yellow-200 dark:border-yellow-800">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      <Bot className="h-5 w-5 text-yellow-600" />
+                      💬 AI Learning Suggestions
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {aiSuggestions.slice(0, 3).map((suggestion, index) => (
+                        <div
+                          key={index}
+                          className="p-3 bg-white/60 dark:bg-black/20 rounded-lg border border-yellow-200 dark:border-yellow-800 hover:bg-white/80 dark:hover:bg-black/40 transition-all duration-200 cursor-pointer group"
+                          onClick={() => {
+                            setCustomGame({
+                              subject: suggestion.subject,
+                              topic: suggestion.topic,
+                              genre: suggestion.genre.toLowerCase().split(' ')[1] || 'adventure'
+                            });
+                            showFeatureToast(`🤖 Great choice! Try "${suggestion.topic}" as a ${suggestion.genre}!`);
+                          }}
+                        >
+                          <div className="flex items-center gap-2 mb-1">
+                            <Lightbulb className="h-4 w-4 text-yellow-600 group-hover:animate-pulse" />
+                            <span className="font-medium text-sm">{suggestion.subject}</span>
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            "{suggestion.topic}" as {suggestion.genre}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-4 text-center">
+                      <p className="text-sm text-yellow-700 dark:text-yellow-400 font-medium">
+                        🤖 "Want to try 'Black Holes' as an Adventure Quest today?"
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-24 bg-muted/30">
         <div className="container">
