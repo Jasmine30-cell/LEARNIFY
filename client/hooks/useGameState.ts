@@ -118,7 +118,7 @@ export function useGameState(questions: GameQuestion[], maxAttempts = 3, levelId
         markGameCompleted(levelId, gameId, gameState.score + 1); // +1 because score hasn't been updated yet
       }
     }
-  }, [gameState.currentQuestion, questions.length]);
+  }, [gameState.currentQuestion, gameState.score, questions.length, levelId, gameId, markGameCompleted]);
 
   const retryQuestion = useCallback(() => {
     setGameState(prev => ({
