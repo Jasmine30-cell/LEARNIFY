@@ -35,6 +35,12 @@ import { useUserProgress } from "@/hooks/useUserProgress";
 export default function Index() {
   const [animationKey, setAnimationKey] = useState(0);
   const [clickCount, setClickCount] = useState(0);
+  const [customGame, setCustomGame] = useState({
+    subject: '',
+    topic: '',
+    genre: ''
+  });
+  const [isGeneratingGame, setIsGeneratingGame] = useState(false);
   const { showFeatureToast, showStatToast, showAchievementToast } = useInteractiveToasts();
   const { user } = useAuth();
   const { userProgress, isLoading } = useUserProgress();
