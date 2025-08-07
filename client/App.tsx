@@ -11,6 +11,7 @@ import { ProtectedRoute, PublicRoute } from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import Welcome from "./pages/Welcome";
 import Learn from "./pages/Learn";
+import MathWorld from "./pages/MathWorld";
 import Challenges from "./pages/Challenges";
 import Leaderboard from "./pages/Leaderboard";
 import Community from "./pages/Community";
