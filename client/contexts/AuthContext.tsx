@@ -41,7 +41,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const savedUser = localStorage.getItem('learnify_user');
     if (savedUser) {
       try {
-        setUser(JSON.parse(savedUser));
+        const parsedUser = JSON.parse(savedUser);
+        // Migration: Add completedGames if it doesn't exist
+        if (!parsedUser.completedGames) {
+          parsedUser.completedGames = [];
+        }
+        setUser(parsedUser);
       } catch (error) {
         console.error('Error parsing saved user:', error);
         localStorage.removeItem('learnify_user');
