@@ -256,28 +256,61 @@ export default function MathWorld() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="p-8">
-                {currentGame === "monster-match" && (
+                {currentGame === "monster-match" && gameState.currentQuestion && (
                   <div className="text-center space-y-6">
                     <div className="text-6xl mb-4">🐉</div>
                     <h3 className="text-xl font-bold">Defeat the Dragon!</h3>
-                    <p className="text-lg">What is 7 + 5?</p>
+                    <p className="text-lg">{gameState.currentQuestion.question}</p>
                     <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
-                      {[10, 12, 13, 15].map((answer) => (
+                      {gameState.currentQuestion.options.map((answer) => (
                         <Button
                           key={answer}
                           variant="outline"
                           size="lg"
                           className="h-16 text-xl hover:scale-105 transition-transform"
-                          onClick={() => {
-                            if (answer === 12) {
-                              setGameScore(prev => prev + 1);
-                              // Show success animation
+                          onClick={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            const result = gameState.checkAnswer(answer);
+
+                            if (result.correct) {
+                              // Show floating rewards
+                              const newRewards = [
+                                {
+                                  id: `xp-${Date.now()}`,
+                                  type: 'xp' as const,
+                                  amount: result.xpGained || 10,
+                                  x: rect.left + rect.width / 2,
+                                  y: rect.top
+                                },
+                                {
+                                  id: `coins-${Date.now() + 1}`,
+                                  type: 'coins' as const,
+                                  amount: result.coinsGained || 5,
+                                  x: rect.left + rect.width / 2 + 50,
+                                  y: rect.top
+                                }
+                              ];
+                              setFloatingRewards(prev => [...prev, ...newRewards]);
+
+                              // Remove floating rewards after animation
+                              setTimeout(() => {
+                                setFloatingRewards(prev => prev.filter(r => !newRewards.find(nr => nr.id === r.id)));
+                              }, 2000);
                             }
                           }}
                         >
                           {answer}
                         </Button>
                       ))}
+                    </div>
+
+                    {/* Progress indicator */}
+                    <div className="mt-6">
+                      <div className="flex justify-between text-sm mb-2">
+                        <span>Question {gameState.gameState.currentQuestion + 1} of {gameState.gameState.totalQuestions}</span>
+                        <span>Score: {gameState.gameState.score}</span>
+                      </div>
+                      <Progress value={gameState.progress.percentage} className="h-2" />
                     </div>
                   </div>
                 )}
