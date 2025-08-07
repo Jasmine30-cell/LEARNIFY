@@ -132,6 +132,11 @@ export default function Index() {
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-sm text-muted-foreground">Welcome back,</span>
                     <span className="text-lg font-semibold text-learnify-600">{user.name}!</span>
+                    {userProgress.newBadges > 0 && (
+                      <span className="text-xs bg-gamify-gold/10 text-gamify-gold px-2 py-1 rounded-full animate-pulse">
+                        🏆 {userProgress.newBadges} new badge{userProgress.newBadges > 1 ? 's' : ''}!
+                      </span>
+                    )}
                   </div>
                 )}
                 <Badge className="bg-learnify-100 text-learnify-700 border-learnify-200 dark:bg-learnify-900 dark:text-learnify-300">
