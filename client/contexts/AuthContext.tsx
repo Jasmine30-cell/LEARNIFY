@@ -190,7 +190,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     signOut,
     addXP,
     addCoins,
-    updateStats
+    updateStats,
+    markGameCompleted
   };
 
   return (
