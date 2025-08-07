@@ -73,6 +73,9 @@ export function useUserProgress() {
     const scienceProgress = Math.min(4, Math.floor(user.xp / 200));
     const englishProgress = Math.min(4, Math.floor(user.xp / 180));
 
+    // For brand new users, show at least one task to get started
+    const isNewUser = user.xp === 0;
+
     const completedTasks = [
       ...(mathProgress >= 1 ? [{ id: 'math1', title: 'Complete Counting Forest', subject: 'Math', completed: true }] : []),
       ...(mathProgress >= 2 ? [{ id: 'math2', title: 'Master Addition Arena', subject: 'Math', completed: true }] : []),
