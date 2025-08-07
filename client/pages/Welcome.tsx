@@ -141,7 +141,7 @@ export default function Welcome() {
             </div>
 
             <div className="relative">
-              {/* Learning Dashboard Preview */}
+              {/* Platform Preview Card */}
               <Card className="bg-white/80 dark:bg-card/80 backdrop-blur-sm border-2 border-learnify-200 dark:border-learnify-800 shadow-2xl">
                 <CardHeader>
                   <div className="flex items-center justify-between">
@@ -149,59 +149,48 @@ export default function Welcome() {
                       <div className="h-8 w-8 rounded-lg bg-learnify-600 flex items-center justify-center">
                         <BookOpen className="h-4 w-4 text-white" />
                       </div>
-                      Learning Progress
+                      Your Learning Dashboard
                     </CardTitle>
-                    <Badge className="bg-gamify-gold/10 text-gamify-gold border-gamify-gold/20">
-                      Level 12
+                    <Badge className="bg-learnify-100 text-learnify-700 border-learnify-200 dark:bg-learnify-900 dark:text-learnify-300">
+                      Sign up to start!
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span>Daily Goal</span>
-                      <span>75% Complete</span>
+                  <div className="text-center py-6">
+                    <div className="h-16 w-16 bg-gradient-to-br from-learnify-500 to-learnify-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                      <Sparkles className="h-8 w-8 text-white" />
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2">
-                      <div className="bg-learnify-600 h-2 rounded-full w-3/4" />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="text-center p-2 bg-gamify-xp/10 rounded-lg">
-                      <div className="text-sm font-medium text-gamify-xp">+125 XP</div>
-                      <div className="text-xs text-muted-foreground">Today</div>
-                    </div>
-                    <div className="text-center p-2 bg-gamify-streak/10 rounded-lg">
-                      <div className="text-sm font-medium text-gamify-streak">7 Days</div>
-                      <div className="text-xs text-muted-foreground">Streak</div>
-                    </div>
-                    <div className="text-center p-2 bg-gamify-gold/10 rounded-lg">
-                      <div className="text-sm font-medium text-gamify-gold">3 New</div>
-                      <div className="text-xs text-muted-foreground">Badges</div>
-                    </div>
-                  </div>
+                    <h3 className="text-lg font-semibold mb-2">Track Your Progress</h3>
+                    <p className="text-muted-foreground text-sm mb-4">
+                      Once you sign up, you'll see your personalized learning dashboard with:
+                    </p>
 
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg">
-                      <CheckCircle className="h-4 w-4 text-gamify-xp" />
-                      <span className="text-sm">Complete JavaScript Basics</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-2 bg-muted/50 rounded-lg">
-                      <CheckCircle className="h-4 w-4 text-gamify-xp" />
-                      <span className="text-sm">Daily Coding Challenge</span>
-                    </div>
-                    <div className="flex items-center gap-2 p-2 bg-muted/30 rounded-lg">
-                      <Target className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">Algorithm Practice</span>
+                    <div className="grid grid-cols-1 gap-3 text-left">
+                      <div className="flex items-center gap-3 p-2 bg-gamify-xp/10 rounded-lg">
+                        <Zap className="h-4 w-4 text-gamify-xp" />
+                        <span className="text-sm">Daily XP tracking and goals</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2 bg-gamify-streak/10 rounded-lg">
+                        <Target className="h-4 w-4 text-gamify-streak" />
+                        <span className="text-sm">Learning streak counter</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2 bg-gamify-gold/10 rounded-lg">
+                        <Trophy className="h-4 w-4 text-gamify-gold" />
+                        <span className="text-sm">Achievement badges</span>
+                      </div>
+                      <div className="flex items-center gap-3 p-2 bg-learnify-100 dark:bg-learnify-900 rounded-lg">
+                        <BookOpen className="h-4 w-4 text-learnify-600" />
+                        <span className="text-sm">Personalized learning tasks</span>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Floating Achievement */}
-              <div className="absolute -top-4 -right-4 bg-gamify-gold text-white p-3 rounded-xl shadow-lg animate-bounce">
-                <Award className="h-6 w-6" />
+              {/* Call to Action */}
+              <div className="absolute -top-4 -right-4 bg-learnify-600 text-white p-3 rounded-xl shadow-lg animate-pulse">
+                <UserPlus className="h-6 w-6" />
               </div>
             </div>
           </div>
