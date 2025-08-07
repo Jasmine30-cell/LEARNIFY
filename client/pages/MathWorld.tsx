@@ -5,7 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { useAuth } from "@/contexts/AuthContext";
+import { useGameState } from "@/hooks/useGameState";
+import { CelebrationOverlay, IncorrectFeedback, FloatingReward } from "@/components/CelebrationAnimations";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 import { 
   ArrowLeft,
   Crown,
