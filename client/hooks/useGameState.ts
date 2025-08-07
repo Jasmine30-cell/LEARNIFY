@@ -112,6 +112,11 @@ export function useGameState(questions: GameQuestion[], maxAttempts = 3, levelId
         showCelebration: false,
         showIncorrectFeedback: false
       }));
+
+      // Mark game as completed
+      if (levelId && gameId) {
+        markGameCompleted(levelId, gameId, gameState.score + 1); // +1 because score hasn't been updated yet
+      }
     }
   }, [gameState.currentQuestion, questions.length]);
 
