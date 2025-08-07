@@ -89,10 +89,10 @@ export default function Index() {
   ];
 
   const stats = [
-    { label: "Active Learners", value: "50K+", icon: Users },
-    { label: "Courses Available", value: "500+", icon: BookOpen },
-    { label: "Rewards Earned", value: "$100K+", icon: Award },
-    { label: "Daily Challenges", value: "1000+", icon: Target }
+    { label: "Your XP This Week", value: `${userProgress.weeklyXP}`, icon: TrendingUp },
+    { label: "Subjects Learning", value: `${userProgress.subjects.filter(s => s.progress > 0).length}`, icon: BookOpen },
+    { label: "Total Badges", value: `${userProgress.totalBadges}`, icon: Award },
+    { label: "Completed Tasks", value: `${userProgress.completedTasks.length}`, icon: Target }
   ];
 
   const testimonials = [
