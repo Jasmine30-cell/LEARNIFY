@@ -206,13 +206,20 @@ export default function Index() {
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>Daily Goal</span>
-                      <span>75% Complete</span>
+                      <span>{userProgress.dailyGoal.percentage}% Complete</span>
                     </div>
                     <div
                       className="w-full bg-muted rounded-full h-2 cursor-pointer hover:h-3 transition-all duration-300"
                       onClick={() => handleDashboardItemClick('progress')}
                     >
-                      <div className="bg-learnify-600 h-2 rounded-full w-3/4 hover:h-3 transition-all duration-300 hover:bg-gradient-to-r hover:from-learnify-500 hover:to-learnify-700" />
+                      <div
+                        className="bg-learnify-600 h-2 rounded-full hover:h-3 transition-all duration-300 hover:bg-gradient-to-r hover:from-learnify-500 hover:to-learnify-700"
+                        style={{ width: `${userProgress.dailyGoal.percentage}%` }}
+                      />
+                    </div>
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                      <span>{userProgress.dailyGoal.completed} XP</span>
+                      <span>{userProgress.dailyGoal.target} XP Goal</span>
                     </div>
                   </div>
                   
