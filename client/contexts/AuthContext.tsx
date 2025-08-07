@@ -106,6 +106,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.removeItem('learnify_user');
   };
 
+  const addXP = (amount: number) => {
+    if (!user) return;
+
+    const updatedUser = {
+      ...user,
+      xp: user.xp + amount,
+      level: Math.floor((user.xp + amount) / 500) + 1 // Level up every 500 XP
+    };
+
+    setUser(updatedUser);
+    localStorage.setItem('learnify_user', JSON.stringify(updatedUser));
+  };
+
+  const addCoins = (amount: number) => {
+    if (!user) return;
+
+    const updatedUser = {
+      ...user,
+      coins: user.coins + amount
+    };
+
+    setUser(updatedUser);
+    localStorage.setItem('learnify_user', JSON.stringify(updatedUser));
+  };
+
+  const updateStats = (xpAmount: number, coinAmount: number) => {
+    if (!user) return;
+
+    const updatedUser = {
+      ...user,
+      xp: user.xp + xpAmount,
+      coins: user.coins + coinAmount,
+      level: Math.floor((user.xp + xpAmount) / 500) + 1
+    };
+
+    setUser(updatedUser);
+    localStorage.setItem('learnify_user', JSON.stringify(updatedUser));
+  };
+
   const value = {
     user,
     isAuthenticated: !!user,
