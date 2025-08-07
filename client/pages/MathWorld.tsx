@@ -421,6 +421,120 @@ export default function MathWorld() {
                 )}
               </CardContent>
             </Card>
+
+            {/* Celebration Overlay */}
+            <CelebrationOverlay
+              show={gameState.gameState.showCelebration}
+              xpGained={10}
+              coinsGained={5}
+              onComplete={gameState.closeCelebration}
+              isLevelUp={gameState.gameState.isLevelUp}
+              newLevel={gameState.gameState.newLevel}
+            />
+
+            {/* Incorrect Feedback */}
+            <IncorrectFeedback
+              show={gameState.gameState.showIncorrectFeedback}
+              attempts={gameState.gameState.wrongAttempts}
+              maxAttempts={gameState.gameState.maxAttempts}
+              onRetry={gameState.retryQuestion}
+              onHint={() => {
+                const hint = gameState.showHint();
+                setHintData(hint);
+                setShowHintModal(true);
+                gameState.closeIncorrectFeedback();
+              }}
+              onClose={gameState.closeIncorrectFeedback}
+            />
+
+            {/* Hint Modal */}
+            {showHintModal && hintData && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                <Card className="w-full max-w-md mx-4 border-2 border-yellow-300">
+                  <CardHeader className="bg-yellow-100 dark:bg-yellow-900">
+                    <CardTitle className="text-xl text-yellow-700 dark:text-yellow-400 flex items-center gap-2">
+                      💡 Hint & Explanation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    {hintData.hint && (
+                      <div className="mb-4">
+                        <h4 className="font-semibold mb-2">Hint:</h4>
+                        <p className="text-muted-foreground">{hintData.hint}</p>
+                      </div>
+                    )}
+                    <div className="mb-4">
+                      <h4 className="font-semibold mb-2">Correct Answer:</h4>
+                      <p className="text-lg font-bold text-green-600">{hintData.correctAnswer}</p>
+                    </div>
+                    {hintData.explanation && (
+                      <div className="mb-4">
+                        <h4 className="font-semibold mb-2">Explanation:</h4>
+                        <p className="text-muted-foreground">{hintData.explanation}</p>
+                      </div>
+                    )}
+                    <Button
+                      onClick={() => {
+                        setShowHintModal(false);
+                        setHintData(null);
+                        gameState.nextQuestion();
+                      }}
+                      className="w-full"
+                    >
+                      Continue Learning
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Floating Rewards */}
+            {floatingRewards.map((reward) => (
+              <FloatingReward
+                key={reward.id}
+                show={true}
+                type={reward.type}
+                amount={reward.amount}
+                x={reward.x}
+                y={reward.y}
+              />
+            ))}
+
+            {/* Game Complete Modal */}
+            {gameState.gameState.gameComplete && (
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+                <Card className="w-full max-w-md mx-4 border-2 border-green-300">
+                  <CardHeader className="bg-green-100 dark:bg-green-900 text-center">
+                    <div className="text-4xl mb-2">🎉</div>
+                    <CardTitle className="text-2xl text-green-700 dark:text-green-400">
+                      Game Complete!
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6 text-center">
+                    <p className="text-lg mb-4">
+                      Final Score: {gameState.gameState.score} / {gameState.gameState.totalQuestions}
+                    </p>
+                    <div className="space-y-3">
+                      <Button
+                        onClick={() => {
+                          gameState.resetGame();
+                        }}
+                        className="w-full"
+                      >
+                        Play Again
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => setCurrentGame(null)}
+                        className="w-full"
+                      >
+                        Back to Level
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </div>
         </div>
       </Layout>
