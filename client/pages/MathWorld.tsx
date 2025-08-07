@@ -53,11 +53,58 @@ interface MiniGame {
   icon: React.ComponentType<{ className?: string }>;
 }
 
+const mathQuestions = {
+  "monster-match": [
+    {
+      id: "mm1",
+      question: "What is 7 + 5?",
+      options: [10, 12, 13, 15],
+      correctAnswer: 12,
+      hint: "Count up from 7: 8, 9, 10, 11, 12",
+      explanation: "7 + 5 = 12. You can count up from 7 or break it down as 7 + 3 + 2 = 10 + 2 = 12"
+    },
+    {
+      id: "mm2",
+      question: "What is 9 + 6?",
+      options: [14, 15, 16, 17],
+      correctAnswer: 15,
+      hint: "Make 10 first: 9 + 1 = 10, then add the remaining 5",
+      explanation: "9 + 6 = 15. You can think of it as 9 + 1 + 5 = 10 + 5 = 15"
+    }
+  ],
+  "treasure-hunt": [
+    {
+      id: "th1",
+      question: "Which chest contains the answer to 15 - 8?",
+      options: [6, 7, 9],
+      correctAnswer: 7,
+      hint: "Count back from 15 or think: what number plus 8 equals 15?",
+      explanation: "15 - 8 = 7. You can count back: 15, 14, 13, 12, 11, 10, 9, 8... that's 7 steps back!"
+    }
+  ],
+  "time-attack": [
+    {
+      id: "ta1",
+      question: "4 × 3 = ?",
+      options: [12, 10, 14, 16],
+      correctAnswer: 12,
+      hint: "Think of 4 groups of 3, or 3 + 3 + 3 + 3",
+      explanation: "4 × 3 = 12. This means 4 groups of 3: 3 + 3 + 3 + 3 = 12"
+    }
+  ]
+};
+
 export default function MathWorld() {
   const { user } = useAuth();
+  const { toast } = useToast();
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
   const [currentGame, setCurrentGame] = useState<string | null>(null);
-  const [gameScore, setGameScore] = useState(0);
+  const [showHintModal, setShowHintModal] = useState(false);
+  const [hintData, setHintData] = useState<{hint?: string; explanation?: string; correctAnswer?: string | number} | null>(null);
+  const [floatingRewards, setFloatingRewards] = useState<Array<{id: string; type: 'xp' | 'coins'; amount: number; x: number; y: number}>>([]);
+
+  const currentQuestions = currentGame ? mathQuestions[currentGame as keyof typeof mathQuestions] || [] : [];
+  const gameState = useGameState(currentQuestions, 3);
 
   const levels: Level[] = [
     {
