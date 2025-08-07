@@ -27,6 +27,7 @@ interface AuthContextType {
   addXP: (amount: number) => void;
   addCoins: (amount: number) => void;
   updateStats: (xpAmount: number, coinAmount: number) => void;
+  markGameCompleted: (levelId: number, gameId: string, score: number) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
