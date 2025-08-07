@@ -600,23 +600,56 @@ export default function MathWorld() {
                   {level.miniGames.map((gameId) => {
                     const game = miniGames.find(g => g.id === gameId);
                     if (!game) return null;
-                    
+
+                    // Check if this game has been completed by the user
+                    const isCompleted = user?.completedGames.some(
+                      completedGame => completedGame.levelId === level.id && completedGame.gameId === gameId
+                    ) || false;
+
+                    const completedGame = user?.completedGames.find(
+                      completedGame => completedGame.levelId === level.id && completedGame.gameId === gameId
+                    );
+
                     const GameIcon = game.icon;
                     return (
-                      <Card key={game.id} className="hover:scale-105 transition-transform cursor-pointer">
+                      <Card key={game.id} className={`hover:scale-105 transition-transform cursor-pointer ${
+                        isCompleted ? 'border-2 border-blue-300 dark:border-blue-700' : ''
+                      }`}>
                         <CardContent className="p-6 text-center">
-                          <div className="h-12 w-12 rounded-lg bg-orange-100 dark:bg-orange-900 flex items-center justify-center mx-auto mb-3">
-                            <GameIcon className="h-6 w-6 text-orange-600" />
+                          <div className={`h-12 w-12 rounded-lg flex items-center justify-center mx-auto mb-3 ${
+                            isCompleted
+                              ? 'bg-blue-100 dark:bg-blue-900'
+                              : 'bg-orange-100 dark:bg-orange-900'
+                          }`}>
+                            <GameIcon className={`h-6 w-6 ${
+                              isCompleted ? 'text-blue-600' : 'text-orange-600'
+                            }`} />
                           </div>
                           <h4 className="font-semibold mb-2">{game.name}</h4>
-                          <p className="text-sm text-muted-foreground mb-4">{game.description}</p>
-                          <Button 
-                            size="sm" 
-                            className="bg-orange-600 hover:bg-orange-700"
+                          <p className="text-sm text-muted-foreground mb-2">{game.description}</p>
+
+                          {isCompleted && completedGame && (
+                            <div className="mb-3">
+                              <Badge className="bg-blue-100 text-blue-700 border-blue-200 mb-2">
+                                ✅ Completed
+                              </Badge>
+                              <p className="text-xs text-blue-600">
+                                Score: {completedGame.score}/3 • {new Date(completedGame.completedAt).toLocaleDateString()}
+                              </p>
+                            </div>
+                          )}
+
+                          <Button
+                            size="sm"
+                            className={`${
+                              isCompleted
+                                ? 'bg-blue-600 hover:bg-blue-700'
+                                : 'bg-orange-600 hover:bg-orange-700'
+                            }`}
                             onClick={() => setCurrentGame(game.id)}
                           >
                             <Play className="h-4 w-4 mr-1" />
-                            Play
+                            {isCompleted ? 'Play Again' : 'Play'}
                           </Button>
                         </CardContent>
                       </Card>
