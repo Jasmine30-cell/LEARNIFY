@@ -18,6 +18,9 @@ interface AuthContextType {
   signIn: (email: string, password: string) => Promise<boolean>;
   signUp: (name: string, email: string, password: string) => Promise<boolean>;
   signOut: () => void;
+  addXP: (amount: number) => void;
+  addCoins: (amount: number) => void;
+  updateStats: (xpAmount: number, coinAmount: number) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
