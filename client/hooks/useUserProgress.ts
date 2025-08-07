@@ -53,11 +53,13 @@ export function useUserProgress() {
       };
     }
 
-    // Calculate dynamic values based on user level and XP
+    // For new users (0 XP), start with 0 progress
+    // For existing users, calculate dynamic values based on level and XP
+    const isNewUser = user.xp === 0;
     const baseMultiplier = Math.max(1, user.level - 1);
-    const todayXP = Math.floor((user.xp * 0.1) + (baseMultiplier * 25));
-    const weeklyXP = Math.floor(todayXP * 4.5);
-    const monthlyXP = Math.floor(weeklyXP * 3.8);
+    const todayXP = isNewUser ? 0 : Math.floor((user.xp * 0.1) + (baseMultiplier * 25));
+    const weeklyXP = isNewUser ? 0 : Math.floor(todayXP * 4.5);
+    const monthlyXP = isNewUser ? 0 : Math.floor(weeklyXP * 3.8);
     
     // Daily goal calculation
     const dailyTarget = 50 + (user.level * 10);
