@@ -194,19 +194,26 @@ export default function Index() {
             <div className="relative">
               {/* Learning Dashboard Preview */}
               <Card className="bg-white/80 dark:bg-card/80 backdrop-blur-sm border-2 border-learnify-200 dark:border-learnify-800 shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500 cursor-pointer group">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="flex items-center gap-2">
-                      <div className="h-8 w-8 rounded-lg bg-learnify-600 flex items-center justify-center">
-                        <BookOpen className="h-4 w-4 text-white" />
-                      </div>
-                      {user?.name ? `${user.name.split(' ')[0]}'s Progress` : "Today's Progress"}
-                    </CardTitle>
-                    <Badge className="bg-gamify-gold/10 text-gamify-gold border-gamify-gold/20">
-                      Level {user?.level || 12}
-                    </Badge>
+                {isLoading ? (
+                  <div className="p-8 text-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-learnify-600 mx-auto mb-4"></div>
+                    <p className="text-muted-foreground">Loading your progress...</p>
                   </div>
-                </CardHeader>
+                ) : (
+                  <>
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="flex items-center gap-2">
+                          <div className="h-8 w-8 rounded-lg bg-learnify-600 flex items-center justify-center">
+                            <BookOpen className="h-4 w-4 text-white" />
+                          </div>
+                          {user?.name ? `${user.name.split(' ')[0]}'s Progress` : "Today's Progress"}
+                        </CardTitle>
+                        <Badge className="bg-gamify-gold/10 text-gamify-gold border-gamify-gold/20">
+                          Level {user?.level || 12}
+                        </Badge>
+                      </div>
+                    </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
@@ -289,6 +296,8 @@ export default function Index() {
                     )}
                   </div>
                 </CardContent>
+                  </>
+                )}
               </Card>
 
               {/* Floating Achievement */}
