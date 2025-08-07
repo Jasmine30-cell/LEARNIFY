@@ -151,7 +151,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isLoading,
     signIn,
     signUp,
-    signOut
+    signOut,
+    addXP,
+    addCoins,
+    updateStats
   };
 
   return (
