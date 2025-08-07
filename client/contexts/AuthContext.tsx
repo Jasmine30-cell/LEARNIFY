@@ -154,6 +154,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('learnify_user', JSON.stringify(updatedUser));
   };
 
+  const markGameCompleted = (levelId: number, gameId: string, score: number) => {
+    if (!user) return;
+
+    // Check if this game has already been completed
+    const alreadyCompleted = user.completedGames.some(
+      game => game.levelId === levelId && game.gameId === gameId
+    );
+
+    if (!alreadyCompleted) {
+      const updatedUser = {
+        ...user,
+        completedGames: [
+          ...user.completedGames,
+          {
+            levelId,
+            gameId,
+            completedAt: new Date().toISOString(),
+            score
+          }
+        ]
+      };
+
+      setUser(updatedUser);
+      localStorage.setItem('learnify_user', JSON.stringify(updatedUser));
+    }
+  };
+
   const value = {
     user,
     isAuthenticated: !!user,
