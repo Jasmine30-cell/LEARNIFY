@@ -96,7 +96,7 @@ const mathQuestions = {
 };
 
 export default function MathWorld() {
-  const { user } = useAuth();
+  const { user, markGameCompleted } = useAuth();
   const { userProgress } = useUserProgress();
   const { toast } = useToast();
   const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
