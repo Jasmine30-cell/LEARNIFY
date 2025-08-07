@@ -149,9 +149,9 @@ export default function Index() {
                   New: AI-Powered Learning Paths
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold tracking-tight">
-                  {user ? 'Continue Your Journey' : 'Learn, Earn, and'}{" "}
+                  {userProgress.completedTasks.length > 0 ? 'Continue Your Journey' : 'Start Your Adventure'}{" "}
                   <span className="bg-gradient-to-r from-learnify-600 to-learnify-500 bg-clip-text text-transparent">
-                    {user ? 'and Level Up!' : 'Level Up'}
+                    and Level Up!
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-[600px]">
