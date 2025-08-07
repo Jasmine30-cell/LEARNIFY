@@ -77,6 +77,47 @@ export default function Index() {
 
     showFeatureToast(messages[itemType as keyof typeof messages] || 'Feature coming soon!');
   };
+
+  const handleCustomGameChange = (field: string, value: string) => {
+    setCustomGame(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleGenerateGame = async () => {
+    if (!customGame.subject || !customGame.topic || !customGame.genre) {
+      showFeatureToast('Please fill in all fields to generate your custom game!');
+      return;
+    }
+
+    setIsGeneratingGame(true);
+
+    // Simulate game generation
+    setTimeout(() => {
+      setIsGeneratingGame(false);
+      showFeatureToast(`🎮 Awesome! Generated a ${customGame.genre} about "${customGame.topic}" in ${customGame.subject}! Game coming soon...`);
+
+      // Reset form
+      setCustomGame({ subject: '', topic: '', genre: '' });
+    }, 2000);
+  };
+
+  const gameGenres = [
+    { value: 'adventure', label: '🎮 Adventure Quest', icon: Gamepad2 },
+    { value: 'puzzle', label: '🧩 Puzzle Game', icon: Puzzle },
+    { value: 'quiz', label: '⚔️ Quiz Battle', icon: Sword },
+    { value: 'arcade', label: '🕹️ Arcade Platformer', icon: Joystick },
+    { value: 'logic', label: '🧠 Logic Challenge', icon: Brain }
+  ];
+
+  const aiSuggestions = [
+    { subject: 'Space Science', topic: 'Black Holes', genre: 'Adventure Quest' },
+    { subject: 'Mathematics', topic: 'Geometry', genre: 'Puzzle Game' },
+    { subject: 'History', topic: 'Ancient Egypt', genre: 'Adventure Quest' },
+    { subject: 'Programming', topic: 'Python Basics', genre: 'Logic Challenge' },
+    { subject: 'Biology', topic: 'Ocean Life', genre: 'Adventure Quest' }
+  ];
   const features = [
     {
       icon: Target,
