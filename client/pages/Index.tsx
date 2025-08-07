@@ -20,6 +20,7 @@ import {
 import { useState, useEffect } from "react";
 import { useInteractiveToasts } from "@/components/InteractiveToast";
 import { useAuth } from "@/contexts/AuthContext";
+import { useUserProgress } from "@/hooks/useUserProgress";
 
 export default function Index() {
   const [animationKey, setAnimationKey] = useState(0);
