@@ -65,7 +65,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         xp: 1247,
         coins: 150,
         level: 12,
-        streak: 7
+        streak: 7,
+        completedGames: []
       };
       
       setUser(mockUser);
