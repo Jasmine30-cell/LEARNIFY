@@ -315,21 +315,43 @@ export default function MathWorld() {
                   </div>
                 )}
 
-                {currentGame === "treasure-hunt" && (
+                {currentGame === "treasure-hunt" && gameState.currentQuestion && (
                   <div className="text-center space-y-6">
                     <div className="text-6xl mb-4">💎</div>
                     <h3 className="text-xl font-bold">Find the Treasure!</h3>
-                    <p className="text-lg">Which chest contains the answer to 15 - 8?</p>
+                    <p className="text-lg">{gameState.currentQuestion.question}</p>
                     <div className="grid grid-cols-3 gap-4 max-w-lg mx-auto">
-                      {[6, 7, 9].map((answer, index) => (
+                      {gameState.currentQuestion.options.map((answer, index) => (
                         <Button
                           key={answer}
                           variant="outline"
                           size="lg"
                           className="h-20 flex flex-col gap-2 hover:scale-105 transition-transform"
-                          onClick={() => {
-                            if (answer === 7) {
-                              setGameScore(prev => prev + 1);
+                          onClick={(e) => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            const result = gameState.checkAnswer(answer);
+
+                            if (result.correct) {
+                              const newRewards = [
+                                {
+                                  id: `xp-${Date.now()}`,
+                                  type: 'xp' as const,
+                                  amount: result.xpGained || 10,
+                                  x: rect.left + rect.width / 2,
+                                  y: rect.top
+                                },
+                                {
+                                  id: `coins-${Date.now() + 1}`,
+                                  type: 'coins' as const,
+                                  amount: result.coinsGained || 5,
+                                  x: rect.left + rect.width / 2 + 50,
+                                  y: rect.top
+                                }
+                              ];
+                              setFloatingRewards(prev => [...prev, ...newRewards]);
+                              setTimeout(() => {
+                                setFloatingRewards(prev => prev.filter(r => !newRewards.find(nr => nr.id === r.id)));
+                              }, 2000);
                             }
                           }}
                         >
@@ -338,28 +360,52 @@ export default function MathWorld() {
                         </Button>
                       ))}
                     </div>
+                    <div className="mt-6">
+                      <Progress value={gameState.progress.percentage} className="h-2" />
+                    </div>
                   </div>
                 )}
 
-                {currentGame === "time-attack" && (
+                {currentGame === "time-attack" && gameState.currentQuestion && (
                   <div className="text-center space-y-6">
                     <div className="flex items-center justify-center gap-2 mb-4">
                       <Clock className="h-6 w-6 text-orange-600" />
                       <span className="text-xl font-bold text-orange-600">0:30</span>
                     </div>
                     <h3 className="text-xl font-bold">Speed Challenge!</h3>
-                    <p className="text-lg">Answer as many as you can before time runs out!</p>
+                    <p className="text-lg">{gameState.currentQuestion.question}</p>
                     <div className="bg-orange-50 dark:bg-orange-950 p-6 rounded-lg">
-                      <p className="text-2xl font-bold mb-4">4 × 3 = ?</p>
                       <div className="grid grid-cols-2 gap-3 max-w-xs mx-auto">
-                        {[12, 10, 14, 16].map((answer) => (
+                        {gameState.currentQuestion.options.map((answer) => (
                           <Button
                             key={answer}
                             variant="outline"
                             className="h-12 hover:scale-105 transition-transform"
-                            onClick={() => {
-                              if (answer === 12) {
-                                setGameScore(prev => prev + 1);
+                            onClick={(e) => {
+                              const rect = e.currentTarget.getBoundingClientRect();
+                              const result = gameState.checkAnswer(answer);
+
+                              if (result.correct) {
+                                const newRewards = [
+                                  {
+                                    id: `xp-${Date.now()}`,
+                                    type: 'xp' as const,
+                                    amount: result.xpGained || 10,
+                                    x: rect.left + rect.width / 2,
+                                    y: rect.top
+                                  },
+                                  {
+                                    id: `coins-${Date.now() + 1}`,
+                                    type: 'coins' as const,
+                                    amount: result.coinsGained || 5,
+                                    x: rect.left + rect.width / 2 + 50,
+                                    y: rect.top
+                                  }
+                                ];
+                                setFloatingRewards(prev => [...prev, ...newRewards]);
+                                setTimeout(() => {
+                                  setFloatingRewards(prev => prev.filter(r => !newRewards.find(nr => nr.id === r.id)));
+                                }, 2000);
                               }
                             }}
                           >
@@ -367,6 +413,9 @@ export default function MathWorld() {
                           </Button>
                         ))}
                       </div>
+                    </div>
+                    <div className="mt-6">
+                      <Progress value={gameState.progress.percentage} className="h-2" />
                     </div>
                   </div>
                 )}
