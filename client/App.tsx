@@ -64,6 +64,16 @@ const App = () => (
                 <MathWorld />
               </ProtectedRoute>
             } />
+            <Route path="/learn/science" element={
+              <ProtectedRoute>
+                <ScienceWorld />
+              </ProtectedRoute>
+            } />
+            <Route path="/learn/english" element={
+              <ProtectedRoute>
+                <EnglishWorld />
+              </ProtectedRoute>
+            } />
             <Route path="/challenges" element={
               <ProtectedRoute>
                 <Challenges />
