@@ -155,8 +155,10 @@ export default function Index() {
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-[600px]">
-                  Transform your learning journey into an exciting adventure. Complete challenges, 
-                  earn rewards, and climb the leaderboards while mastering new skills.
+                  {userProgress.completedTasks.length > 0
+                    ? `You're doing amazing! You've completed ${userProgress.completedTasks.length} tasks and earned ${userProgress.totalBadges} badges. Keep up the great work!`
+                    : "Transform your learning journey into an exciting adventure. Complete challenges, earn rewards, and climb the leaderboards while mastering new skills."
+                  }
                 </p>
               </div>
 
