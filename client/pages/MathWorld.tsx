@@ -237,10 +237,10 @@ export default function MathWorld() {
               </Button>
               <div className="flex items-center gap-4">
                 <Badge className="bg-gamify-gold/10 text-gamify-gold border-gamify-gold/20">
-                  Score: {gameScore}
+                  Score: {gameState.gameState.score}
                 </Badge>
                 <Badge className="bg-gamify-xp/10 text-gamify-xp border-gamify-xp/20">
-                  XP: +{gameScore * 10}
+                  XP: +{gameState.gameState.score * 10}
                 </Badge>
               </div>
             </div>
