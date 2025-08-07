@@ -119,6 +119,11 @@ export default function Index() {
     }
   ];
 
+  // Don't render anything if user is not authenticated
+  if (!user) {
+    return null;
+  }
+
   return (
     <Layout>
       {/* Hero Section */}
