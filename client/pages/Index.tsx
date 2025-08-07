@@ -189,6 +189,31 @@ export default function Index() {
                   );
                 })}
               </div>
+
+              {/* Subjects Progress Overview */}
+              {userProgress.subjects.some(s => s.progress > 0) && (
+                <div className="mt-8 space-y-3">
+                  <h3 className="text-lg font-semibold text-center">Your Learning Journey</h3>
+                  {userProgress.subjects.map((subject) => (
+                    subject.progress > 0 && (
+                      <div key={subject.id} className="bg-muted/30 p-3 rounded-lg">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="font-medium">{subject.name}</span>
+                          <span className="text-sm text-muted-foreground">
+                            {subject.levelsCompleted}/{subject.totalLevels} levels
+                          </span>
+                        </div>
+                        <div className="w-full bg-muted rounded-full h-2">
+                          <div
+                            className="bg-learnify-600 h-2 rounded-full transition-all duration-500"
+                            style={{ width: `${subject.progress}%` }}
+                          />
+                        </div>
+                      </div>
+                    )
+                  ))}
+                </div>
+              )}
             </div>
 
             <div className="relative">
