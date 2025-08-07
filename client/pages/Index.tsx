@@ -228,7 +228,7 @@ export default function Index() {
                       className="text-center p-2 bg-gamify-xp/10 rounded-lg hover:bg-gamify-xp/20 transition-all duration-300 cursor-pointer hover:scale-105"
                       onClick={() => handleDashboardItemClick('xp')}
                     >
-                      <div className="text-sm font-medium text-gamify-xp">+125 XP</div>
+                      <div className="text-sm font-medium text-gamify-xp">+{userProgress.todayXP} XP</div>
                       <div className="text-xs text-muted-foreground">Today</div>
                     </div>
                     <div
@@ -242,7 +242,7 @@ export default function Index() {
                       className="text-center p-2 bg-gamify-gold/10 rounded-lg hover:bg-gamify-gold/20 transition-all duration-300 cursor-pointer hover:scale-105"
                       onClick={() => handleDashboardItemClick('badges')}
                     >
-                      <div className="text-sm font-medium text-gamify-gold">3 New</div>
+                      <div className="text-sm font-medium text-gamify-gold">{userProgress.newBadges} New</div>
                       <div className="text-xs text-muted-foreground">Badges</div>
                     </div>
                   </div>
