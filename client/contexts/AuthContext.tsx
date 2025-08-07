@@ -6,6 +6,7 @@ interface User {
   email: string;
   avatar?: string;
   xp: number;
+  coins: number;
   level: number;
   streak: number;
 }
