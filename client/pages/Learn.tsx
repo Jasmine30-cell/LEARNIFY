@@ -292,7 +292,7 @@ export default function Learn() {
                 <Trophy className="h-5 w-5 text-learnify-600" />
               </div>
               <div>
-                <p className="text-lg font-bold">{subjects.reduce((sum, s) => sum + s.completedLevels, 0)}</p>
+                <p className="text-lg font-bold">{userProgress.subjects.reduce((sum, s) => sum + s.levelsCompleted, 0)}</p>
                 <p className="text-xs text-muted-foreground">Levels Complete</p>
               </div>
             </CardContent>
