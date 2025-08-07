@@ -23,8 +23,8 @@ interface GameState {
   newLevel?: number;
 }
 
-export function useGameState(questions: GameQuestion[], maxAttempts = 3) {
-  const { user, updateStats } = useAuth();
+export function useGameState(questions: GameQuestion[], maxAttempts = 3, levelId?: number, gameId?: string) {
+  const { user, updateStats, markGameCompleted } = useAuth();
   
   const [gameState, setGameState] = useState<GameState>({
     currentQuestion: 0,
