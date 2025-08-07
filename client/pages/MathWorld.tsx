@@ -108,6 +108,10 @@ export default function MathWorld() {
   const currentQuestions = currentGame ? mathQuestions[currentGame as keyof typeof mathQuestions] || [] : [];
   const gameState = useGameState(currentQuestions, 3);
 
+  // Calculate actual user progress - each level unlocks at different XP thresholds
+  const mathSubject = userProgress.subjects.find(s => s.id === 'math');
+  const levelsCompleted = mathSubject?.levelsCompleted || 0;
+
   const levels: Level[] = [
     {
       id: 1,
@@ -118,37 +122,37 @@ export default function MathWorld() {
       bgGradient: "from-green-100 to-emerald-100 dark:from-green-950 dark:to-emerald-950",
       difficulty: "Easy",
       xpReward: 100,
-      completed: true,
-      locked: false,
-      stars: 3,
+      completed: levelsCompleted >= 1,
+      locked: false, // First level is always unlocked
+      stars: levelsCompleted >= 1 ? 3 : 0,
       miniGames: ["monster-match", "treasure-hunt"]
     },
     {
       id: 2,
-      name: "Addition Arena", 
+      name: "Addition Arena",
       theme: "⚔️ Battle Arena",
       description: "Solve addition problems to defeat monsters and save the kingdom!",
       icon: Sword,
       bgGradient: "from-red-100 to-orange-100 dark:from-red-950 dark:to-orange-950",
       difficulty: "Easy",
       xpReward: 150,
-      completed: true,
-      locked: false,
-      stars: 2,
+      completed: levelsCompleted >= 2,
+      locked: levelsCompleted < 1,
+      stars: levelsCompleted >= 2 ? 2 : 0,
       miniGames: ["monster-match", "time-attack"]
     },
     {
       id: 3,
       name: "Subtraction Swamp",
-      theme: "🐸 Mystical Swamp", 
+      theme: "🐸 Mystical Swamp",
       description: "Escape the swamp by solving subtraction puzzles and avoiding traps!",
       icon: Shield,
       bgGradient: "from-teal-100 to-cyan-100 dark:from-teal-950 dark:to-cyan-950",
       difficulty: "Medium",
       xpReward: 200,
-      completed: true,
-      locked: false,
-      stars: 1,
+      completed: levelsCompleted >= 3,
+      locked: levelsCompleted < 2,
+      stars: levelsCompleted >= 3 ? 1 : 0,
       miniGames: ["treasure-hunt", "time-attack"]
     },
     {
@@ -160,9 +164,9 @@ export default function MathWorld() {
       bgGradient: "from-slate-100 to-gray-100 dark:from-slate-950 dark:to-gray-950",
       difficulty: "Medium",
       xpReward: 250,
-      completed: false,
-      locked: false,
-      stars: 0,
+      completed: levelsCompleted >= 4,
+      locked: levelsCompleted < 3,
+      stars: levelsCompleted >= 4 ? 3 : 0,
       miniGames: ["monster-match", "treasure-hunt", "time-attack"]
     },
     {
@@ -174,9 +178,9 @@ export default function MathWorld() {
       bgGradient: "from-purple-100 to-violet-100 dark:from-purple-950 dark:to-violet-950",
       difficulty: "Hard",
       xpReward: 300,
-      completed: false,
-      locked: true,
-      stars: 0,
+      completed: levelsCompleted >= 5,
+      locked: levelsCompleted < 4,
+      stars: levelsCompleted >= 5 ? 3 : 0,
       miniGames: ["monster-match", "treasure-hunt", "time-attack"]
     }
   ];
