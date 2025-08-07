@@ -106,7 +106,7 @@ export default function MathWorld() {
   const [floatingRewards, setFloatingRewards] = useState<Array<{id: string; type: 'xp' | 'coins'; amount: number; x: number; y: number}>>([]);
 
   const currentQuestions = currentGame ? mathQuestions[currentGame as keyof typeof mathQuestions] || [] : [];
-  const gameState = useGameState(currentQuestions, 3);
+  const gameState = useGameState(currentQuestions, 3, selectedLevel || undefined, currentGame || undefined);
 
   // Calculate actual user progress - each level unlocks at different XP thresholds
   const mathSubject = userProgress.subjects.find(s => s.id === 'math');
