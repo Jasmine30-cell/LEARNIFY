@@ -12,6 +12,8 @@ import Index from "./pages/Index";
 import Welcome from "./pages/Welcome";
 import Learn from "./pages/Learn";
 import MathWorld from "./pages/MathWorld";
+import ScienceWorld from "./pages/ScienceWorld";
+import EnglishWorld from "./pages/EnglishWorld";
 import Challenges from "./pages/Challenges";
 import Leaderboard from "./pages/Leaderboard";
 import Community from "./pages/Community";
