@@ -9,6 +9,12 @@ interface User {
   coins: number;
   level: number;
   streak: number;
+  completedGames: Array<{
+    levelId: number;
+    gameId: string;
+    completedAt: string;
+    score: number;
+  }>;
 }
 
 interface AuthContextType {
