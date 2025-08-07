@@ -84,9 +84,17 @@ export function useUserProgress() {
     ];
 
     const pendingTasks = [
-      ...(mathProgress < 3 ? [{ id: 'math3', title: 'Escape Subtraction Swamp', subject: 'Math', difficulty: 'Medium' as const }] : []),
-      ...(scienceProgress < 2 ? [{ id: 'sci2', title: 'Launch Space Station', subject: 'Science', difficulty: 'Easy' as const }] : []),
-      ...(englishProgress < 2 ? [{ id: 'eng2', title: 'Cast Word Spells', subject: 'English', difficulty: 'Easy' as const }] : []),
+      // For new users, show starter tasks
+      ...(isNewUser ? [
+        { id: 'math1', title: 'Start Counting Forest', subject: 'Math', difficulty: 'Easy' as const },
+        { id: 'sci1', title: 'Explore Nature Garden', subject: 'Science', difficulty: 'Easy' as const },
+        { id: 'eng1', title: 'Begin Alphabet Adventure', subject: 'English', difficulty: 'Easy' as const }
+      ] : [
+        // For existing users, show progression tasks
+        ...(mathProgress < 3 ? [{ id: 'math3', title: 'Escape Subtraction Swamp', subject: 'Math', difficulty: 'Medium' as const }] : []),
+        ...(scienceProgress < 2 ? [{ id: 'sci2', title: 'Launch Space Station', subject: 'Science', difficulty: 'Easy' as const }] : []),
+        ...(englishProgress < 2 ? [{ id: 'eng2', title: 'Cast Word Spells', subject: 'English', difficulty: 'Easy' as const }] : []),
+      ]),
     ];
 
     const subjects = [
