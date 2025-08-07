@@ -304,7 +304,7 @@ export default function Learn() {
                 <Zap className="h-5 w-5 text-gamify-xp" />
               </div>
               <div>
-                <p className="text-lg font-bold">{totalXPEarned}</p>
+                <p className="text-lg font-bold">{user?.xp || 0}</p>
                 <p className="text-xs text-muted-foreground">XP Earned</p>
               </div>
             </CardContent>
@@ -316,7 +316,7 @@ export default function Learn() {
                 <Star className="h-5 w-5 text-gamify-gold" />
               </div>
               <div>
-                <p className="text-lg font-bold">12</p>
+                <p className="text-lg font-bold">{userProgress.totalBadges}</p>
                 <p className="text-xs text-muted-foreground">Badges Earned</p>
               </div>
             </CardContent>
