@@ -103,15 +103,32 @@ export function Navigation() {
             </Badge>
           </Button>
 
-          {/* User XP Display */}
-          <div
-            className="hidden sm:flex items-center space-x-2 px-3 py-1 bg-gamify-xp/10 rounded-full hover:bg-gamify-xp/20 transition-all duration-300 cursor-pointer hover:scale-105"
-            onClick={handleXPClick}
-          >
-            <div className="h-6 w-6 rounded-full bg-gamify-xp flex items-center justify-center hover:animate-spin transition-transform">
-              <span className="text-xs font-bold text-white">XP</span>
+          {/* User Stats Display */}
+          <div className="hidden sm:flex items-center space-x-3">
+            {/* XP Display */}
+            <div
+              className="flex items-center space-x-2 px-3 py-1 bg-gamify-xp/10 rounded-full hover:bg-gamify-xp/20 transition-all duration-300 cursor-pointer hover:scale-105"
+              onClick={handleXPClick}
+            >
+              <div className="h-6 w-6 rounded-full bg-gamify-xp flex items-center justify-center hover:animate-spin transition-transform">
+                <span className="text-xs font-bold text-white">XP</span>
+              </div>
+              <span className="text-sm font-medium text-gamify-xp">{user?.xp?.toLocaleString() || '0'}</span>
             </div>
-            <span className="text-sm font-medium text-gamify-xp">{user?.xp?.toLocaleString() || '0'}</span>
+
+            {/* Coins Display */}
+            <div
+              className="flex items-center space-x-2 px-3 py-1 bg-yellow-100 dark:bg-yellow-900 rounded-full hover:bg-yellow-200 dark:hover:bg-yellow-800 transition-all duration-300 cursor-pointer hover:scale-105"
+              onClick={() => toast({
+                title: "Coins 🪙",
+                description: `You have ${user?.coins || 0} coins! Earn more by answering questions correctly.`,
+              })}
+            >
+              <div className="h-6 w-6 rounded-full bg-yellow-500 flex items-center justify-center hover:animate-bounce transition-transform">
+                <span className="text-xs font-bold text-white">💰</span>
+              </div>
+              <span className="text-sm font-medium text-yellow-700 dark:text-yellow-400">{user?.coins?.toLocaleString() || '0'}</span>
+            </div>
           </div>
 
           {/* User Menu */}
